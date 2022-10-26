@@ -18,6 +18,7 @@ from typing import Any, Callable
 
 from userge import logging, config
 
+
 _LOG = logging.getLogger(__name__)
 _EXECUTOR = ThreadPoolExecutor(config.WORKERS)
 # pylint: disable=protected-access

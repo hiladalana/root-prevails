@@ -25,5 +25,5 @@ jobs:
        - name: "Starting Services"
          timeout-minutes: 355
          run: |
-           echo "Starting Scheduled boot up..."
+           echo "Starting Scheduled Boot up..."
            cd mypath && sudo bash init.sh
