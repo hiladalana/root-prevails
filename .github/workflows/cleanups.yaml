@@ -1,0 +1,18 @@
+name: "Purge Old Runs"
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 0 * * 1' # every Monday @ 00:00
+
+jobs:
+  purge_runs:
+    runs-on: ubuntu-latest
+    steps:
+      - name: "Deleting Runs"
+        uses: Mattraks/delete-workflow-runs@v2
+        with:
+          token: ${{ github.token }}
+          repository: ${{ github.repository }}
+          retain_days: 5
+          keep_minimum_runs: 5

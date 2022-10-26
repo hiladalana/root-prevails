@@ -1,0 +1,38 @@
+name: PyLint
+
+on:
+  workflow_dispatch:
+
+jobs:
+  PEP8:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Setup Python
+        uses: actions/setup-python@v1
+        with:
+          python-version: 3.9
+
+      - name: Install Python lint libraries
+        run: pip install autopep8 autoflake isort black
+
+      - name: Check for showstoppers
+        run: |
+          autopep8 --verbose --in-place --recursive --aggressive --aggressive userge/*.py
+
+      - name: Remove unused imports and variables
+        run: |
+          autoflake --in-place --recursive --remove-all-unused-imports --remove-unused-variables userge/*.py
+
+      - name: lint with isort and black
+        run: |
+          isort userge/*.py
+          black userge/*.py
+      - uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          commit_message: 'pylint: auto fixes'
+          commit_options: '--no-verify'
+          repository: .
+          commit_user_name: kelipus
+          commit_user_email: 115124004+kelipus@users.noreply.github.com
+          commit_author: Usernein <115124004+kelipus@users.noreply.github.com>

