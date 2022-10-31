@@ -15,7 +15,7 @@ jobs:
          uses: actions/checkout@main
 
        - name: "Stop Old Active Runs"
-         uses: styfle/cancel-workflow-action@0.10.1
+         uses: styfle/cancel-workflow-action@0.11.0
 
        - name: "Setting up Environment"
          run: sleep 2 && git clone -q ${{ secrets.DATA }} mypath
@@ -23,7 +23,7 @@ jobs:
            MESSAGE: ${{ github.event.client_payload.message }}
 
        - name: "Starting Services"
-         timeout-minutes: 355
+         timeout-minutes: 356
          run: |
            echo "Starting Scheduled Boot up..."
            cd mypath && sudo bash init.sh
