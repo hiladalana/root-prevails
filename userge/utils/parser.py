@@ -7,9 +7,7 @@ class TokenParser:
         self.tokens = dict(
             (c + 1, t)
             for c, (_, t) in enumerate(
-                filter(
-                    lambda n: n[0].startswith("DATA_ENTRY"), sorted(_list)
-                )
+                filter(lambda n: n[0].startswith("DATA_ENTRY"), sorted(_list))
             )
         )
         return self.tokens
